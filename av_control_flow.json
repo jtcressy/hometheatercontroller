@@ -1,0 +1,1397 @@
+[
+    {
+        "id": "1ce5a25d.7e41fe",
+        "type": "tab",
+        "label": "AV Control",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "ddee88be.0658b",
+        "type": "inject",
+        "z": "1ce5a25d.7e41fe",
+        "name": "Test",
+        "topic": "",
+        "payload": "{\"action\": \"test\", \"value\": \"TEST\"}",
+        "payloadType": "json",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 590,
+        "y": 100,
+        "wires": [
+            [
+                "f895b80e.5545c"
+            ]
+        ]
+    },
+    {
+        "id": "3bff82f1.54d656",
+        "type": "mqtt in",
+        "z": "1ce5a25d.7e41fe",
+        "name": "",
+        "topic": "jtcressy/f/hometheatercontroller",
+        "qos": "2",
+        "broker": "96c1d38a.4be6c",
+        "x": 510,
+        "y": 60,
+        "wires": [
+            [
+                "f895b80e.5545c"
+            ]
+        ]
+    },
+    {
+        "id": "3f83a17.ff4b15e",
+        "type": "ui_button",
+        "z": "1ce5a25d.7e41fe",
+        "name": "Power OFF System",
+        "group": "a5d606fe.ac28b",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "label": "Power OFF",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "red",
+        "icon": "power",
+        "payload": "{\"action\": \"power\", \"value\": \"off\"}",
+        "payloadType": "json",
+        "topic": "jtcressy/f/hometheatercontroller",
+        "x": 550,
+        "y": 460,
+        "wires": [
+            [
+                "f895b80e.5545c"
+            ]
+        ]
+    },
+    {
+        "id": "eb3a692f.c4a54",
+        "type": "mqtt out",
+        "z": "1ce5a25d.7e41fe",
+        "name": "",
+        "topic": "jtcressy/f/hometheatercontroller",
+        "qos": "0",
+        "retain": "",
+        "broker": "96c1d38a.4be6c",
+        "x": 1350,
+        "y": 20,
+        "wires": []
+    },
+    {
+        "id": "84dfee47.e1b4c",
+        "type": "ui_button",
+        "z": "1ce5a25d.7e41fe",
+        "name": "",
+        "group": "39b3414b.ebe606",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "label": "XBOX (GAME)",
+        "tooltip": "Change input to xbox (\"GAME\")",
+        "color": "",
+        "bgcolor": "green",
+        "icon": "gamepad",
+        "payload": "{\"action\":\"set_input\",\"value\":\"game\"}",
+        "payloadType": "json",
+        "topic": "",
+        "x": 560,
+        "y": 500,
+        "wires": [
+            [
+                "f895b80e.5545c"
+            ]
+        ]
+    },
+    {
+        "id": "de23fd01.54fc6",
+        "type": "ui_button",
+        "z": "1ce5a25d.7e41fe",
+        "name": "",
+        "group": "39b3414b.ebe606",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "label": "AUX",
+        "tooltip": "Change input to auxillary (\"AUX\")",
+        "color": "",
+        "bgcolor": "",
+        "icon": "launch",
+        "payload": "{\"action\": \"set_input\", \"value\": \"auxillary\"}",
+        "payloadType": "json",
+        "topic": "",
+        "x": 590,
+        "y": 540,
+        "wires": [
+            [
+                "f895b80e.5545c"
+            ]
+        ]
+    },
+    {
+        "id": "5baaa060.8f25f8",
+        "type": "ui_button",
+        "z": "1ce5a25d.7e41fe",
+        "name": "",
+        "group": "39b3414b.ebe606",
+        "order": 5,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "label": "Chromecast",
+        "tooltip": "Change input to chromecast (\"MEDIA PLAYER\")",
+        "color": "",
+        "bgcolor": "",
+        "icon": "cast",
+        "payload": "{\"action\": \"set_input\", \"value\": \"mediaplayer\"}",
+        "payloadType": "json",
+        "topic": "",
+        "x": 570,
+        "y": 580,
+        "wires": [
+            [
+                "f895b80e.5545c"
+            ]
+        ]
+    },
+    {
+        "id": "16d2aa39.635826",
+        "type": "template",
+        "z": "1ce5a25d.7e41fe",
+        "name": "Power Off Avr",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "-c 'from denonavr import DenonAVR;avr = DenonAVR(\"{{avr_hostname}}\");avr.power_off()'",
+        "output": "str",
+        "x": 1260,
+        "y": 280,
+        "wires": [
+            [
+                "d93b5429.02ee98",
+                "af5cd380.5b5fa8"
+            ]
+        ]
+    },
+    {
+        "id": "d93b5429.02ee98",
+        "type": "exec",
+        "z": "1ce5a25d.7e41fe",
+        "command": "python3",
+        "addpay": true,
+        "append": "",
+        "useSpawn": "false",
+        "timer": "",
+        "oldrc": false,
+        "name": "Python3",
+        "x": 1560,
+        "y": 360,
+        "wires": [
+            [
+                "a645dfdb.a30f08"
+            ],
+            [],
+            []
+        ]
+    },
+    {
+        "id": "fad634d.340ab48",
+        "type": "change",
+        "z": "1ce5a25d.7e41fe",
+        "name": "set avr vars",
+        "rules": [
+            {
+                "t": "set",
+                "p": "avr_hostname",
+                "pt": "msg",
+                "to": "192.168.20.8",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 790,
+        "y": 240,
+        "wires": [
+            [
+                "6e677af0.8b31cc"
+            ]
+        ]
+    },
+    {
+        "id": "f7195b80.7579a",
+        "type": "switch",
+        "z": "1ce5a25d.7e41fe",
+        "name": "Switch Action",
+        "property": "payload.action",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "power",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "set_input",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "set_volume",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "vol_up",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "vol_dn",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 5,
+        "x": 810,
+        "y": 360,
+        "wires": [
+            [
+                "bbb7619e.e877f",
+                "6dad9e1.cdc026"
+            ],
+            [
+                "3630a059.ffd218"
+            ],
+            [
+                "821169c0.4bb7a",
+                "c73e135b.0350b8"
+            ],
+            [
+                "bdf709e1.c57e78"
+            ],
+            [
+                "4f428c3d.5ab58c"
+            ]
+        ]
+    },
+    {
+        "id": "f7ca556a.8adc98",
+        "type": "debug",
+        "z": "1ce5a25d.7e41fe",
+        "name": "Incoming JSON Command",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": true,
+        "complete": "payload",
+        "x": 1010,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "f895b80e.5545c",
+        "type": "json",
+        "z": "1ce5a25d.7e41fe",
+        "name": "",
+        "property": "payload",
+        "action": "obj",
+        "pretty": false,
+        "x": 750,
+        "y": 200,
+        "wires": [
+            [
+                "f7ca556a.8adc98",
+                "fad634d.340ab48"
+            ]
+        ]
+    },
+    {
+        "id": "35b4c6.eff5f33a",
+        "type": "inject",
+        "z": "1ce5a25d.7e41fe",
+        "name": "Test",
+        "topic": "jtcressy/f/hometheatercontroller",
+        "payload": "{\"action\":\"test\",\"value\":\"TEST\"}",
+        "payloadType": "json",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 990,
+        "y": 20,
+        "wires": [
+            [
+                "4ccc79df.da45"
+            ]
+        ]
+    },
+    {
+        "id": "4ccc79df.da45",
+        "type": "json",
+        "z": "1ce5a25d.7e41fe",
+        "name": "",
+        "property": "payload",
+        "action": "str",
+        "pretty": true,
+        "x": 1130,
+        "y": 20,
+        "wires": [
+            [
+                "eb3a692f.c4a54"
+            ]
+        ]
+    },
+    {
+        "id": "7f3dab82.70c5d4",
+        "type": "inject",
+        "z": "1ce5a25d.7e41fe",
+        "name": "power off",
+        "topic": "",
+        "payload": "{\"action\": \"power\", \"value\": \"off\"}",
+        "payloadType": "json",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 580,
+        "y": 180,
+        "wires": [
+            [
+                "f895b80e.5545c"
+            ]
+        ]
+    },
+    {
+        "id": "bbb7619e.e877f",
+        "type": "switch",
+        "z": "1ce5a25d.7e41fe",
+        "name": "Switch Power",
+        "property": "payload.value",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "on",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "off",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 1010,
+        "y": 300,
+        "wires": [
+            [
+                "27f985dc.9e18d2",
+                "48bcde63.fe4dd8"
+            ],
+            [
+                "16d2aa39.635826",
+                "93126810.b6524"
+            ]
+        ]
+    },
+    {
+        "id": "27f985dc.9e18d2",
+        "type": "template",
+        "z": "1ce5a25d.7e41fe",
+        "name": "Power On Avr",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "-c 'from denonavr import DenonAVR;avr = DenonAVR(\"{{avr_hostname}}\");avr.power_on()'",
+        "output": "str",
+        "x": 1260,
+        "y": 240,
+        "wires": [
+            [
+                "d93b5429.02ee98",
+                "af5cd380.5b5fa8"
+            ]
+        ]
+    },
+    {
+        "id": "c970a8ff.985138",
+        "type": "inject",
+        "z": "1ce5a25d.7e41fe",
+        "name": "power on",
+        "topic": "",
+        "payload": "{\"action\": \"power\", \"value\": \"on\"}",
+        "payloadType": "json",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 580,
+        "y": 140,
+        "wires": [
+            [
+                "f895b80e.5545c"
+            ]
+        ]
+    },
+    {
+        "id": "af5cd380.5b5fa8",
+        "type": "debug",
+        "z": "1ce5a25d.7e41fe",
+        "name": "Python Command",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": true,
+        "complete": "payload",
+        "x": 1590,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "a57640ba.daca3",
+        "type": "inject",
+        "z": "1ce5a25d.7e41fe",
+        "name": "set input game",
+        "topic": "",
+        "payload": "{\"action\": \"set_input\", \"value\": \"game\"}",
+        "payloadType": "json",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 560,
+        "y": 220,
+        "wires": [
+            [
+                "f895b80e.5545c"
+            ]
+        ]
+    },
+    {
+        "id": "a22e114c.e2aa7",
+        "type": "inject",
+        "z": "1ce5a25d.7e41fe",
+        "name": "set input fm",
+        "topic": "",
+        "payload": "{\"action\": \"set_input\", \"value\": \"FM\"}",
+        "payloadType": "json",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 570,
+        "y": 260,
+        "wires": [
+            [
+                "f895b80e.5545c"
+            ]
+        ]
+    },
+    {
+        "id": "6e677af0.8b31cc",
+        "type": "change",
+        "z": "1ce5a25d.7e41fe",
+        "name": "set proj vars",
+        "rules": [
+            {
+                "t": "set",
+                "p": "proj_hostname",
+                "pt": "msg",
+                "to": "192.168.20.9",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "proj_password",
+                "pt": "msg",
+                "to": "panasonic",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 790,
+        "y": 280,
+        "wires": [
+            [
+                "f7195b80.7579a"
+            ]
+        ]
+    },
+    {
+        "id": "48bcde63.fe4dd8",
+        "type": "template",
+        "z": "1ce5a25d.7e41fe",
+        "name": "Power On Projector",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "-c 'from pypjlink import Projector;proj = Projector.from_address(\"{{proj_hostname}}\");proj.authenticate(\"{{proj_password}}\");proj.set_power(\"on\")'",
+        "output": "str",
+        "x": 1270,
+        "y": 260,
+        "wires": [
+            [
+                "d93b5429.02ee98",
+                "af5cd380.5b5fa8"
+            ]
+        ]
+    },
+    {
+        "id": "93126810.b6524",
+        "type": "template",
+        "z": "1ce5a25d.7e41fe",
+        "name": "Power Off Projector",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "-c 'from pypjlink import Projector;proj = Projector.from_address(\"{{proj_hostname}}\");proj.authenticate(\"{{proj_password}}\");proj.set_power(\"off\")'",
+        "output": "str",
+        "x": 1270,
+        "y": 300,
+        "wires": [
+            [
+                "d93b5429.02ee98",
+                "af5cd380.5b5fa8"
+            ]
+        ]
+    },
+    {
+        "id": "5c589cfb.a4a524",
+        "type": "template",
+        "z": "1ce5a25d.7e41fe",
+        "name": "Set Input",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "-c 'import json;from denonavr import DenonAVR;avr = DenonAVR(\"{{avr_hostname}}\");avr.set_input_func(\"{{payload.value}}\");print(json.dumps({\"info\": \"inputlist\", \"inputs\": avr.input_func_list}))'",
+        "output": "str",
+        "x": 1240,
+        "y": 340,
+        "wires": [
+            [
+                "d93b5429.02ee98",
+                "af5cd380.5b5fa8"
+            ]
+        ]
+    },
+    {
+        "id": "3630a059.ffd218",
+        "type": "change",
+        "z": "1ce5a25d.7e41fe",
+        "name": "Translate Input Names",
+        "rules": [
+            {
+                "t": "change",
+                "p": "payload.value",
+                "pt": "msg",
+                "from": "cable",
+                "fromt": "str",
+                "to": "CBL/SAT",
+                "tot": "str"
+            },
+            {
+                "t": "change",
+                "p": "payload.value",
+                "pt": "msg",
+                "from": "satellite",
+                "fromt": "str",
+                "to": "CBL/SAT",
+                "tot": "str"
+            },
+            {
+                "t": "change",
+                "p": "payload.value",
+                "pt": "msg",
+                "from": "dvd",
+                "fromt": "str",
+                "to": "DVD",
+                "tot": "str"
+            },
+            {
+                "t": "change",
+                "p": "payload.value",
+                "pt": "msg",
+                "from": "fm",
+                "fromt": "str",
+                "to": "FM",
+                "tot": "str"
+            },
+            {
+                "t": "change",
+                "p": "payload.value",
+                "pt": "msg",
+                "from": "(blu|Blu).*",
+                "fromt": "re",
+                "to": "Blu-ray",
+                "tot": "str"
+            },
+            {
+                "t": "change",
+                "p": "payload.value",
+                "pt": "msg",
+                "from": "game",
+                "fromt": "str",
+                "to": "GAME",
+                "tot": "str"
+            },
+            {
+                "t": "change",
+                "p": "payload.value",
+                "pt": "msg",
+                "from": "(aux|AUX).*",
+                "fromt": "re",
+                "to": "AUX",
+                "tot": "str"
+            },
+            {
+                "t": "change",
+                "p": "payload.value",
+                "pt": "msg",
+                "from": "media.*",
+                "fromt": "re",
+                "to": "MEDIA PLAYER",
+                "tot": "str"
+            },
+            {
+                "t": "change",
+                "p": "payload.value",
+                "pt": "msg",
+                "from": "netw.*",
+                "fromt": "re",
+                "to": "NETWORK",
+                "tot": "str"
+            },
+            {
+                "t": "change",
+                "p": "payload.value",
+                "pt": "msg",
+                "from": "internet.*",
+                "fromt": "re",
+                "to": "Internet Radio",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1040,
+        "y": 340,
+        "wires": [
+            [
+                "5c589cfb.a4a524",
+                "554ccdcc.ca1a1c"
+            ]
+        ]
+    },
+    {
+        "id": "821169c0.4bb7a",
+        "type": "template",
+        "z": "1ce5a25d.7e41fe",
+        "name": "Set Volume",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "-c 'import json;import math;from denonavr import DenonAVR;avr = DenonAVR(\"{{avr_hostname}}\");avr.set_volume(float((5*math.ceil((float((float({{payload.value}})-0) * (18 - (-80)) / (98 - 0) + (-80)) * 10) / 5)) / 10))'",
+        "output": "str",
+        "x": 1150,
+        "y": 380,
+        "wires": [
+            [
+                "af5cd380.5b5fa8",
+                "d93b5429.02ee98"
+            ]
+        ]
+    },
+    {
+        "id": "84b2d975.4edd48",
+        "type": "ui_toast",
+        "z": "1ce5a25d.7e41fe",
+        "position": "top right",
+        "displayTime": "3",
+        "highlight": "",
+        "outputs": 0,
+        "ok": "OK",
+        "cancel": "",
+        "topic": "",
+        "name": "",
+        "x": 1650,
+        "y": 500,
+        "wires": []
+    },
+    {
+        "id": "c73e135b.0350b8",
+        "type": "template",
+        "z": "1ce5a25d.7e41fe",
+        "name": "Notify set volume",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "Volume set to {{payload.value}} !",
+        "output": "str",
+        "x": 1410,
+        "y": 540,
+        "wires": [
+            [
+                "84b2d975.4edd48"
+            ]
+        ]
+    },
+    {
+        "id": "6dad9e1.cdc026",
+        "type": "template",
+        "z": "1ce5a25d.7e41fe",
+        "name": "Notify power",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "System powered {{payload.value}} !",
+        "output": "str",
+        "x": 1390,
+        "y": 500,
+        "wires": [
+            [
+                "84b2d975.4edd48"
+            ]
+        ]
+    },
+    {
+        "id": "554ccdcc.ca1a1c",
+        "type": "template",
+        "z": "1ce5a25d.7e41fe",
+        "name": "Notify set input",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "Input set to {{payload.value}} !",
+        "output": "str",
+        "x": 1400,
+        "y": 460,
+        "wires": [
+            [
+                "84b2d975.4edd48"
+            ]
+        ]
+    },
+    {
+        "id": "257427b4.57488",
+        "type": "ui_button",
+        "z": "1ce5a25d.7e41fe",
+        "name": "",
+        "group": "39b3414b.ebe606",
+        "order": 6,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "label": "FM",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "icon": "radio",
+        "payload": "{\"action\": \"set_input\", \"value\": \"FM\"}",
+        "payloadType": "json",
+        "topic": "",
+        "x": 590,
+        "y": 620,
+        "wires": [
+            [
+                "f895b80e.5545c"
+            ]
+        ]
+    },
+    {
+        "id": "a645dfdb.a30f08",
+        "type": "debug",
+        "z": "1ce5a25d.7e41fe",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "x": 1620,
+        "y": 460,
+        "wires": []
+    },
+    {
+        "id": "ec181eb1.589588",
+        "type": "ui_button",
+        "z": "1ce5a25d.7e41fe",
+        "name": "",
+        "group": "39b3414b.ebe606",
+        "order": 7,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "label": "Internet Radio",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "icon": "radio",
+        "payload": "{\"action\": \"set_input\", \"value\": \"Internet Radio\"}",
+        "payloadType": "json",
+        "topic": "",
+        "x": 560,
+        "y": 660,
+        "wires": [
+            [
+                "f895b80e.5545c"
+            ]
+        ]
+    },
+    {
+        "id": "da3d8f03.128a58",
+        "type": "ui_button",
+        "z": "1ce5a25d.7e41fe",
+        "name": "",
+        "group": "39b3414b.ebe606",
+        "order": 8,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "label": "Network",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "icon": "settings_input_hdmi",
+        "payload": "{\"action\": \"set_input\", \"value\": \"NETWORK\"}",
+        "payloadType": "json",
+        "topic": "",
+        "x": 580,
+        "y": 700,
+        "wires": [
+            [
+                "f895b80e.5545c"
+            ]
+        ]
+    },
+    {
+        "id": "97dfc9e2.6c97a",
+        "type": "ui_button",
+        "z": "1ce5a25d.7e41fe",
+        "name": "",
+        "group": "39b3414b.ebe606",
+        "order": 4,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "label": "Blu-ray",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "icon": "album",
+        "payload": "{\"action\": \"set_input\", \"value\": \"Blu-ray\"}",
+        "payloadType": "json",
+        "topic": "",
+        "x": 580,
+        "y": 740,
+        "wires": [
+            [
+                "f895b80e.5545c"
+            ]
+        ]
+    },
+    {
+        "id": "4541c0d5.6d745",
+        "type": "ui_button",
+        "z": "1ce5a25d.7e41fe",
+        "name": "",
+        "group": "39b3414b.ebe606",
+        "order": 9,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "label": "CBL/SAT",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "icon": "tv",
+        "payload": "{\"action\": \"set_input\", \"value\": \"CBL/SAT\"}",
+        "payloadType": "json",
+        "topic": "",
+        "x": 580,
+        "y": 780,
+        "wires": [
+            [
+                "f895b80e.5545c"
+            ]
+        ]
+    },
+    {
+        "id": "b4bccf76.ede05",
+        "type": "ui_button",
+        "z": "1ce5a25d.7e41fe",
+        "name": "",
+        "group": "39b3414b.ebe606",
+        "order": 10,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "label": "DVD",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "icon": "album",
+        "payload": "{\"action\": \"set_input\", \"value\": \"DVD\"}",
+        "payloadType": "json",
+        "topic": "",
+        "x": 590,
+        "y": 820,
+        "wires": [
+            [
+                "f895b80e.5545c"
+            ]
+        ]
+    },
+    {
+        "id": "820a85c7.eb069",
+        "type": "template",
+        "z": "1ce5a25d.7e41fe",
+        "name": "Get all stats",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "-c 'import json;import math;from denonavr import DenonAVR;from pypjlink import Projector;proj = Projector.from_address(\"{{proj_hostname}}\");proj.authenticate(\"{{proj_password}}\");avr = DenonAVR(\"{{avr_hostname}}\");print(json.dumps({\"proj_power\":proj.get_power(), \"avr_power\":avr.power, \"avr_input\":avr.input_func, \"avr_volume\":avr.volume}))'",
+        "output": "str",
+        "x": 830,
+        "y": 620,
+        "wires": [
+            [
+                "82ed34a4.6b3ee8"
+            ]
+        ]
+    },
+    {
+        "id": "9ac9bd44.cf0e38",
+        "type": "change",
+        "z": "1ce5a25d.7e41fe",
+        "name": "set avr vars",
+        "rules": [
+            {
+                "t": "set",
+                "p": "avr_hostname",
+                "pt": "msg",
+                "to": "192.168.20.8",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 830,
+        "y": 540,
+        "wires": [
+            [
+                "c05b6dc.6c3939"
+            ]
+        ]
+    },
+    {
+        "id": "c05b6dc.6c3939",
+        "type": "change",
+        "z": "1ce5a25d.7e41fe",
+        "name": "set proj vars",
+        "rules": [
+            {
+                "t": "set",
+                "p": "proj_hostname",
+                "pt": "msg",
+                "to": "192.168.20.9",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "proj_password",
+                "pt": "msg",
+                "to": "panasonic",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 830,
+        "y": 580,
+        "wires": [
+            [
+                "820a85c7.eb069"
+            ]
+        ]
+    },
+    {
+        "id": "3bf3b5d5.72e77a",
+        "type": "inject",
+        "z": "1ce5a25d.7e41fe",
+        "name": "Update Display",
+        "topic": "",
+        "payload": "true",
+        "payloadType": "bool",
+        "repeat": "1",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "x": 810,
+        "y": 480,
+        "wires": [
+            [
+                "9ac9bd44.cf0e38"
+            ]
+        ]
+    },
+    {
+        "id": "82ed34a4.6b3ee8",
+        "type": "exec",
+        "z": "1ce5a25d.7e41fe",
+        "command": "python3",
+        "addpay": true,
+        "append": "",
+        "useSpawn": "false",
+        "timer": "",
+        "oldrc": false,
+        "name": "Python3",
+        "x": 1040,
+        "y": 540,
+        "wires": [
+            [
+                "ff7644ed.ab4e08"
+            ],
+            [],
+            []
+        ]
+    },
+    {
+        "id": "ff7644ed.ab4e08",
+        "type": "json",
+        "z": "1ce5a25d.7e41fe",
+        "name": "",
+        "property": "payload",
+        "action": "obj",
+        "pretty": false,
+        "x": 1030,
+        "y": 600,
+        "wires": [
+            [
+                "149498a4.503ed7",
+                "32f728db.beb178",
+                "8ce45b7f.e16d98",
+                "212c742e.6d64fc",
+                "2f4c73f7.658abc"
+            ]
+        ]
+    },
+    {
+        "id": "149498a4.503ed7",
+        "type": "debug",
+        "z": "1ce5a25d.7e41fe",
+        "name": "Status Update",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "x": 1210,
+        "y": 600,
+        "wires": []
+    },
+    {
+        "id": "32f728db.beb178",
+        "type": "ui_text",
+        "z": "1ce5a25d.7e41fe",
+        "group": "a5d606fe.ac28b",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "name": "Projector Power Status",
+        "label": "Projector Power: ",
+        "format": "{{msg.payload.proj_power}}",
+        "layout": "row-center",
+        "x": 1250,
+        "y": 640,
+        "wires": []
+    },
+    {
+        "id": "8ce45b7f.e16d98",
+        "type": "ui_text",
+        "z": "1ce5a25d.7e41fe",
+        "group": "a5d606fe.ac28b",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "name": "AVR Power Status",
+        "label": "AVR Power: ",
+        "format": "{{msg.payload.avr_power}}",
+        "layout": "row-center",
+        "x": 1230,
+        "y": 680,
+        "wires": []
+    },
+    {
+        "id": "212c742e.6d64fc",
+        "type": "function",
+        "z": "1ce5a25d.7e41fe",
+        "name": "Update Volume",
+        "func": "var value = msg.payload.avr_volume;\nvar in_min = (-80);\nvar in_max = 18;\nvar out_min = 0;\nvar out_max = 98;\nmsg.payload = (value - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 1220,
+        "y": 760,
+        "wires": [
+            [
+                "acd102ae.2358e8"
+            ]
+        ]
+    },
+    {
+        "id": "2f4c73f7.658abc",
+        "type": "ui_text",
+        "z": "1ce5a25d.7e41fe",
+        "group": "39b3414b.ebe606",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "name": "AVR Input Status",
+        "label": "Current Input: ",
+        "format": "{{msg.payload.avr_input}}",
+        "layout": "row-center",
+        "x": 1230,
+        "y": 720,
+        "wires": []
+    },
+    {
+        "id": "2847b696.7a980a",
+        "type": "ui_button",
+        "z": "1ce5a25d.7e41fe",
+        "name": "Power ON System",
+        "group": "a5d606fe.ac28b",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "label": "Power ON",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "green",
+        "icon": "power",
+        "payload": "{\"action\": \"power\", \"value\": \"on\"}",
+        "payloadType": "json",
+        "topic": "jtcressy/f/hometheatercontroller",
+        "x": 550,
+        "y": 420,
+        "wires": [
+            [
+                "f895b80e.5545c"
+            ]
+        ]
+    },
+    {
+        "id": "4b2fb3e2.143dac",
+        "type": "ui_button",
+        "z": "1ce5a25d.7e41fe",
+        "name": "Vol UP",
+        "group": "72884dad.2430c4",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "label": "Vol +",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "green",
+        "icon": "plus",
+        "payload": "{\"action\": \"vol_up\", \"value\": \"\"}",
+        "payloadType": "json",
+        "topic": "jtcressy/f/hometheatercontroller",
+        "x": 590,
+        "y": 340,
+        "wires": [
+            [
+                "f895b80e.5545c"
+            ]
+        ]
+    },
+    {
+        "id": "2427bfb6.46477",
+        "type": "ui_button",
+        "z": "1ce5a25d.7e41fe",
+        "name": "Vol DN",
+        "group": "72884dad.2430c4",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "label": "Vol -",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "red",
+        "icon": "minus",
+        "payload": "{\"action\": \"vol_dn\", \"value\": \"\"}",
+        "payloadType": "json",
+        "topic": "jtcressy/f/hometheatercontroller",
+        "x": 590,
+        "y": 380,
+        "wires": [
+            [
+                "f895b80e.5545c"
+            ]
+        ]
+    },
+    {
+        "id": "acd102ae.2358e8",
+        "type": "ui_gauge",
+        "z": "1ce5a25d.7e41fe",
+        "name": "Volume gauge",
+        "group": "72884dad.2430c4",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "Volume",
+        "label": "%",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "98",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "50",
+        "seg2": "70",
+        "x": 1420,
+        "y": 760,
+        "wires": []
+    },
+    {
+        "id": "bdf709e1.c57e78",
+        "type": "template",
+        "z": "1ce5a25d.7e41fe",
+        "name": "Vol UP",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "-c 'import json;import math;from denonavr import DenonAVR;avr = DenonAVR(\"{{avr_hostname}}\");avr.volume_up()'",
+        "output": "str",
+        "x": 1170,
+        "y": 420,
+        "wires": [
+            [
+                "af5cd380.5b5fa8",
+                "d93b5429.02ee98"
+            ]
+        ]
+    },
+    {
+        "id": "4f428c3d.5ab58c",
+        "type": "template",
+        "z": "1ce5a25d.7e41fe",
+        "name": "Vol DN",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "-c 'import json;import math;from denonavr import DenonAVR;avr = DenonAVR(\"{{avr_hostname}}\");avr.volume_down()'",
+        "output": "str",
+        "x": 1170,
+        "y": 460,
+        "wires": [
+            [
+                "af5cd380.5b5fa8",
+                "d93b5429.02ee98"
+            ]
+        ]
+    },
+    {
+        "id": "96c1d38a.4be6c",
+        "type": "mqtt-broker",
+        "z": "",
+        "name": "adafruit-io",
+        "broker": "mqtts://io.adafruit.com",
+        "port": "1883",
+        "clientid": "",
+        "usetls": false,
+        "compatmode": true,
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": ""
+    },
+    {
+        "id": "a5d606fe.ac28b",
+        "type": "ui_group",
+        "z": "",
+        "name": "System Power",
+        "tab": "b79f8b72.db74d",
+        "disp": true,
+        "width": "6",
+        "collapse": false
+    },
+    {
+        "id": "39b3414b.ebe606",
+        "type": "ui_group",
+        "z": "",
+        "name": "AVR Input",
+        "tab": "b79f8b72.db74d",
+        "disp": true,
+        "width": "6",
+        "collapse": false
+    },
+    {
+        "id": "72884dad.2430c4",
+        "type": "ui_group",
+        "z": "",
+        "name": "Volume",
+        "tab": "b79f8b72.db74d",
+        "disp": true,
+        "width": "6",
+        "collapse": false
+    },
+    {
+        "id": "b79f8b72.db74d",
+        "type": "ui_tab",
+        "z": "",
+        "name": "AV Control",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false
+    }
+]
